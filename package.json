@@ -10,8 +10,6 @@
     "node.js",
     "express",
     "sequelize",
-    "jwt",
-    "authentication",
     "postgresql"
   ],
   "author": "Alexander Nasokin",
