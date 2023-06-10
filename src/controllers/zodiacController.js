@@ -59,15 +59,23 @@ class zodiacController {
     }
   }
 
+  async getOneByPersonId(req, res, next) {
+    const { id: personId } = req.params;
+    try {
+      const zodiac = await Zodiac.findOne({ where: { personId } });
+      if (!zodiac) {
+        return next(ApiError.badRequest('There is no such zodiac registered'));
+      }
+      res.json(zodiac);
+    } catch (e) {
+      return next(ApiError.internal('Server error'));
+    }
+  }
+
   async update(req, res, next) {
     const { id } = req.params;
     let { sun, moon, mercury, venus, mars, jupiter, saturn, uranus, neptune, pluto, retro, description, personId } = req.body;
     try {
-      // const candidate = await Zodiac.findOne({ where: { id } });
-      // if (candidate && candidate.id !== +id) {
-      //   return next(ApiError.wrongValue('This zodiac item is already registered'));
-      // }
-
       const zodiac = await Zodiac.findOne({ where: { id } });
       if (!zodiac) {
         return next(ApiError.badRequest('There is no such zodiac registered'));
