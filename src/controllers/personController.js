@@ -72,7 +72,7 @@ class PersonController {
       if (zodiac) {
         await zodiac.destroy();
       }
-      res.json(id);
+      res.json({ id });
     } catch (e) {
       return next(ApiError.internal('Server error'));
     }
